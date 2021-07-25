@@ -2,15 +2,22 @@
   <div class="login-wrap">
     <div class="login-html">
       <h2 class="position-relative text-center text-white pb-2">Iniciar Sesión</h2>
-      <form class="login-form">
+      <form class="login-form has-warning">
         <div class="sign-in-html">
           <div class="group">
             <label for="user" class="label">Email</label>
-            <input id="user" type="text" class="input">
+            <input [ngclass]="{'input-error':email.invalid && (email.dirty || email.touched}" id="user" type="text" class="input" formControlName="email" required>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+              <span *ngIf="email.error.required">Para continuar debe ingresar su contraseña</span>
+              <span *ngIf="email.error.minlenght">Su contraseña debe tener mínimo 8 caracteres</span>
+            </div>
           </div>
           <div class="group">
             <label for="password" class="label">Contraseña</label>
-            <input id="password" type="password" class="input" data-type="password">
+            <input [ngclass]="{'input-error':password.invalid && (password.dirty || password.touched}" id="password" type="password" class="input" formControlName="password" data-type=password required>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
+              <span *ngIf="password.error.required"></span>
+            </div>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="flexcheckdefault">
@@ -19,11 +26,15 @@
             </label>
           </div>
           <div class="group">
-            <input type="submit" class="button" value="Ingresar">
+            <input  type="button" class="button" value="Ingresar">
           </div>
           <div class="hr"></div>
           <div class="foot-lnk">
             <a href="#forgot">Olvidaste tu contraseña?</a>
           </div>
         </div>
+      </form>
+    </div>
+  </div>
+</div>
 
