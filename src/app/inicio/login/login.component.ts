@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators,} from '@angular/forms';
+import {FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +7,22 @@ import {FormControl, FormGroup, Validators,} from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-formulariologin= new FormGroup({
-  email:new FormControl ('', [Validators.required,Validators.email],[]),
-  password: new FormControl ('',[Validators.required, Validators.minLength(8)])
-})
+
+  createFormGroup() {
+    return new FormGroup ({
+      email: new FormControl(''),
+      password: new FormControl(''),
+      recuerdame: new FormControl(true)
+    });
+  }
+
+formulariologin :FormGroup;
 
 
-  constructor() { }
+
+  constructor() {
+    this.formulariologin = this.createFormGroup();
+   }
 
   ngOnInit(): void {
     // ...
@@ -21,6 +30,18 @@ formulariologin= new FormGroup({
 
   get email(){
     return this.formulariologin.get('email')
+  }
+  get password(){
+    return this.formulariologin.get('password')
+  }
+  get recuerdame(){
+    return this.formulariologin.get('recuerdame')
+  }
+
+  clickBtnLogin() {
+    if (this.formulariologin.valid) {
+      console.log('control validez credenciales');
+  }
   }
 
 
